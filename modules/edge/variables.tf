@@ -5,12 +5,18 @@ variable "device_uuid" {
 variable "location" {
     type = string
 }
-variable "infra_profile" {
+variable "branch" {
     type = string
 }
-variable "app_profile" {
-    type = string
+
+variable "cluster_profiles" {
+    type = list(object({
+        name = string
+        tag = optional(string)
+        packs = optional(list(object({
+            name = string
+            tag = optional(string)
+            values = optional(string)
+        })))
+    }))
 }
-# variable "k8s_version" {
-#     type = string
-# }

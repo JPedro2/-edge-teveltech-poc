@@ -1,12 +1,11 @@
-data "spectrocloud_cluster_profile" "edge_infra_profile" {
-  # name = "store-edge-infra"
-  name = var.infra_profile
+data "spectrocloud_cluster_profile" "this" {
+  for_each = {
+    for profile in var.cluster_profiles : profile.name => profile
+  }
+  name = each.key
+  version = each.value["tag"]
 }
 
-data "spectrocloud_cluster_profile" "edge_app_profile" {
-  # name = "store-edge-apps"
-  name = var.app_profile
-}
 
 resource "spectrocloud_appliance" "this" {
   count = length(var.device_uuid)
@@ -15,6 +14,7 @@ resource "spectrocloud_appliance" "this" {
   labels = {
     "cluster" = spectrocloud_cluster_import.this.id
     "name" = "edge-${var.location}"
+    "environment" = var.branch
   }
   wait = false
 }
@@ -22,43 +22,24 @@ resource "spectrocloud_appliance" "this" {
 resource "spectrocloud_cluster_import" "this" {
   name               = "edge-${var.location}"
   cloud              = "generic"
-  tags = ["imported:false"]
-  cluster_profile {
-      id = data.spectrocloud_cluster_profile.edge_infra_profile.id
-      pack {
-        name = "opensuse-k3s"
-        tag = "1.21.12-k3s0"
-        values = <<-EOT
-        manifests:
-          opensuse-k3s:
-            stages:
-              network:
-              - if: '[ -f "/run/cos/live_mode" ]'
-                files:
-                - path: /tmp/cloud-init
-                  permissions: 0644
-                  owner: 0
-                  group: 0
-                  content: |
+  tags = ["imported:false","environment:${var.branch}"]
 
-                    stages:
-                      initramfs:
-                      - name: "Setup users"
-                        users:
-                          p3os:
-                            passwd: p3os
-                      network:
-                      - if: '[ ! -f "/run/cos/recovery_mode" ]'
-                        name: "SSH keys"
-                        authorized_keys:
-                          p3os:
-                          - github:saamalik
-                          - github:jeremy-spectro
-                          - github:3pings
-        EOT
+  dynamic "cluster_profile" {
+  
+    for_each = var.cluster_profiles
+    content {
+      id = data.spectrocloud_cluster_profile.this[cluster_profile.value.name].id
+      
+      dynamic "pack" {
+        for_each = cluster_profile.value.packs == null ? [] : cluster_profile.value.packs
+
+        content {
+          name = pack.value.name
+          tag = pack.value.tag
+          values = pack.value.values
+        }
       }
-  }
-    cluster_profile {
-      id = data.spectrocloud_cluster_profile.edge_app_profile.id
+      }
+    
   }
 }
