@@ -1,17 +1,29 @@
-module "store1205" {
-    source = "../palette-gitops/modules/edge"
+module "vm_store1205" {
+    source = "../../modules/edge_vm"
+    datacenter = "Thor"
+    datastore = "Mjolnir"
+    cluster = "Thor"
+    resource_pool = "edge"
+    network = "skunkworks|mgmt|services"
+    vm_name_prefix = "store1205"
+    instances = 3
+    cpu = 4
+    memory = 8192
+    folder = "edge"
+    path_to_iso = "iso/p6os-opensuse-k3s-v1.21.12-6.iso"
+    disk0_size = 30
+    disk1_size = 70
+
+}
+
+module "cluster_store1205" {
+    source = "../../modules/edge"
     # Store Number/Location
     location = "store1205"
     # Github Branch
     branch = "dev"
     # Device UUIDs to be added
-    device_uuid = [
-        "8e4f1c2f85d4",
-        "f0a369109712",
-        "33426b57d3ee" 
-
- 
-    ]
+    device_uuid = module.vm_store1205.uuid
     # Profiles to be added
     cluster_profiles = [
         {   name = "store-edge-infra"
