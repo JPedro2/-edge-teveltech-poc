@@ -15,8 +15,13 @@ variable "cluster_profiles" {
         tag = optional(string)
         packs = optional(list(object({
             name = string
-            tag = optional(string)
+            tag = string
             values = optional(string)
+            manifest = optional(list(object({
+                name = string
+                tag = string
+                content = string
+            })))
         })))
     }))
 }

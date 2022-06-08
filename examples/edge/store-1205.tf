@@ -1,5 +1,5 @@
-module "store1205" {
-    source = "../palette-gitops/modules/edge"
+module "cluster_store1205" {
+    source = "../../modules/edge"
     # Store Number/Location
     location = "store1205"
     # Github Branch
@@ -9,8 +9,6 @@ module "store1205" {
         "8e4f1c2f85d4",
         "f0a369109712",
         "33426b57d3ee" 
-
- 
     ]
     # Profiles to be added
     cluster_profiles = [

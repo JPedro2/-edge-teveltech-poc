@@ -37,9 +37,19 @@ resource "spectrocloud_cluster_import" "this" {
           name = pack.value.name
           tag = pack.value.tag
           values = pack.value.values
+          
+          # dynamic "manifest" {
+          #   for_each = pack.value.manifest== null ? [] : pack.value.manifest
+      
+          #   content {
+          #   name    = manifest.value.name
+          #   tag = manifest.value.tag
+          #   content = manifest.value.content
+          #   }
+          # }
         }
       }
-      }
+    }
     
   }
 }
