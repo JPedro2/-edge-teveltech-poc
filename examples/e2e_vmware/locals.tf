@@ -8,6 +8,9 @@ locals {
     },
     metallb_config = {
       location = "./config/metallb_config.yaml"
+    },
+    linux_vm = {
+      location = "./config/linux-vm.yaml"
     }
   }
 }
