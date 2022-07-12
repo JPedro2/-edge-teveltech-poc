@@ -1,6 +1,3 @@
-# variable "device_uuid" {
-#     type = list(string)
-# }
 variable "edge_server" {
     type = list(object({
         name = string
@@ -8,19 +5,18 @@ variable "edge_server" {
         control_plane = bool
     }))
 }
-# variable "tags" {
-#   type = object({
-#     state = string
-#     city = string
-#     type = string
-#     latlng = string
-#     stage = string
-#   })
-# }
-variable "location" {
-    type = string
+variable "cluster_tags" {
+  type        = list(string)
+  description = "Tags to be added to the profile.  key:value"
+  default     = []
 }
-variable "branch" {
+variable "node_labels" {
+    type = map(string)
+    description = "A map of labels to use on all nodes"
+    default = {}
+
+}
+variable "name" {
     type = string
 }
 variable "cluster_profiles" {
