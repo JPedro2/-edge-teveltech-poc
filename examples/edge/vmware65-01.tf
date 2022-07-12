@@ -1,11 +1,6 @@
 module "well-01" {
     source = "../../modules/edge"
-    # Store Number/Location
-    location = "well-01"
-    # Github Branch
-    branch = "dev"
-    # List of UUIDs for the devices
-    # edge_server = module.vm_store1205.edge_server
+    name = "well-01"
     edge_server = [
         {
             name = "well-edge-01"

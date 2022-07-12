@@ -3,26 +3,28 @@ module "cluster-04" {
     # Store Number/Location
     name = "uk4"
     cluster_tags = [
-        # "vip:10.239.10.10"
+        "vip:10.239.10.10"
     ]
+    node_labels {
+        location = "pittsburgh"
+    }
     # List of UUIDs for the devices
-    # edge_server = module.vm_store1205.edge_server
     edge_server = [
         {
             name = "uk4-01"
             uuid = "e1521bd0003f"
             control_plane = true
+        },
+        {
+            name = "uk3-03-02"
+            uuid = "4d2fff805277"
+            control_plane = false 
+        },
+        {
+            name = "uk3-03-03"
+            uuid = "3a796a26df9f"
+            control_plane = false
         }
-        # {
-        #     name = "uk3-03-02"
-        #     uuid = "4d2fff805277"
-        #     control_plane = false 
-        # },
-        # {
-        #     name = "uk3-03-03"
-        #     uuid = "3a796a26df9f"
-        #     control_plane = false
-        # }
     ]
     # Profiles to be added
     cluster_profiles = [
