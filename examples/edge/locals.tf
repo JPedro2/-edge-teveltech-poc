@@ -1,7 +1,7 @@
 locals {
   value_files = {
-    k3s_config = {
-      location = "./config/k3s_config.yaml"
+    metallb_config = {
+      location = "./config/metallb_config.yaml"
     }
   }
 }

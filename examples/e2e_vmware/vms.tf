@@ -1,36 +1,33 @@
-
-
-
-module "vm_store1205" {
+module "vm-04" {
     source = "../../modules/edge_vm"
-    datacenter = "Thor"
+    datacenter = "Asgard"
     datastore = "Mjolnir"
     cluster = "Thor"
     resource_pool = "edge"
-    instances = 3
+    instances = 1
     network = { # To use DHCP create Empty list ["",""]; You can also use a CIDR annotation;
-        "skunkworks|k8s|dev" = [
-            "10.239.21.21", 
-            "10.239.21.22", 
-            "10.239.21.23",
-            # "10.239.21.24", 
-            # "10.239.21.25", 
-            # "10.239.21.26"
+        "skunkworks|mgmt|services" = [
+            "", 
+            # "", 
+            # "",
+            # "",
+            # "",
+            # "",
         ] 
     }
     # ipv4submask = ["24","24","24","24","24","24"]
     control_plane = [
         true,
-        true,
-        true,
         # true,
+        # true,
+        # false,
         # false,
         # false
     ]
     dns_server_list = ["10.101.128.15","10.101.128.16"]
     vmgateway = "10.239.21.1"
-    template_name = "p6os-ubuntu-cncf-1.21.12"
-    vm_name_prefix = "store1205"
+    template_name = "p6os-picard-ubuntu-k3s-1.21.12"
+    vm_name_prefix = "uk3-03"
     cpu = 4
     memory = 8192
     folder = "edge"
@@ -39,4 +36,3 @@ module "vm_store1205" {
     # disk1_size = 64
     # disk2_size = 100
 }
-

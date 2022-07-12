@@ -77,14 +77,14 @@ resource "vsphere_virtual_machine" "this" {
     size             = data.vsphere_virtual_machine.template[0].disks.0.size
     unit_number = 0
   }
-  disk {
-    label            = "disk1"
-    size             = data.vsphere_virtual_machine.template[0].disks.1.size
-    unit_number = 1
-  }
-  disk {
-    label            = "disk2"
-    size             = data.vsphere_virtual_machine.template[0].disks.2.size
-    unit_number = 2
-  }
+  # disk {
+  #   label            = "disk1"
+  #   size             = data.vsphere_virtual_machine.template[0].disks.1.size
+  #   unit_number = 1
+  # }
+  # disk {
+  #   label            = "disk2"
+  #   size             = data.vsphere_virtual_machine.template[0].disks.2.size
+  #   unit_number = 2
+  # }
 }

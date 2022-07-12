@@ -12,7 +12,7 @@ param(
  ForEach($VM in $VMs){
 
 #Deploy the VM
-	New-VM -Name $VM.guestName -Template p3os-temp -Datastore Mjolnir -ResourcePool edge -Location edge
+	New-VM -Name $VM.guestName -Template sb-opensuse-k3s-1.21.12 -Datastore vsanDatastore3 -ResourcePool(Get-ResourcePool -name RP_Justin -Location(Get-Cluster "Cluster3"))
 
 #PowerOn VM
 	Get-VM $VM.guestName | Start-VM	
