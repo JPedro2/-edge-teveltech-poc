@@ -15,9 +15,6 @@ variable "dns_server_list" {
   type    = list(string)
   default = null
 }
-variable "control_plane" {
-  type = list(bool)
-}
 variable "dns_suffix_list" {
   description = "A list of DNS search domains to add to the DNS configuration on the virtual machine."
   type        = list(string)

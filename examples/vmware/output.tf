@@ -1,4 +1,4 @@
 output "uuid" {
-    value = module.washington.uuid
+    value = module.vms.uuid
 
 }
