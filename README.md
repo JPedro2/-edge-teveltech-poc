@@ -1,9 +1,9 @@
 ## Instructions
 1. `cd edge/`
 2. Rename `terraform.example.tfvars` to `terraform.tfvars`
-   
-        `mv terraform.example.tfvars terraform.tfvars`
-
+    ```
+    mv terraform.example.tfvars terraform.tfvars
+    ```
 4. Add `API Token` from your Spectro Cloud Palette Tenant to `terraform.tfvars`
     [![Palette API Token](./docs/img/palette-api-token.png)](./docs/img/palette-api-token.png)
 5. Modify `cluster.tf` file
