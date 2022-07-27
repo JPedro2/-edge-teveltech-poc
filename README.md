@@ -14,3 +14,7 @@
 6. Create the cluster with Terraform
    1. `terraform init`
    2. `terraform apply`
+7. To delete the cluster
+   1. Delete the cluster in Palette first
+   [![Delete Cluster](./docs/img/delete-cluster.png)](./docs/img/delete-cluster.png)
+   2. `terraform destroy`
