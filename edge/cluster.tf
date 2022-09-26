@@ -1,7 +1,7 @@
 module "cluster-04" {
     source = "../../modules/edge"
     # Store Number/Location
-    name = "teveltech-poc-1"
+    name = "edge-poc-1"
     # cluster_tags = [
     #     "vip:10.239.10.10"
     # ]
@@ -21,7 +21,7 @@ module "cluster-04" {
         #     control_plane = false 
         # },
         {
-            name = "teveltech-server-1"
+            name = "edge-device-1"
             uuid = "fa0a6ad61f00"
             control_plane = true
         }
